@@ -29,7 +29,7 @@
          <div class="slider-bg hero-card has-bg-image" style="background-image: url('{{ 'Ram1.png' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
          </div>   
         {% endif %} 
-        <div class="card-content">
+        {% comment %} <div class="card-content">
            <h1 class="h1 hero-title slider-reveal">
             {{ section.settings.title1 }}<br/>
             {{ section.settings.subtitle1 }}
@@ -44,7 +44,7 @@
               role="link" aria-disabled="true"
             {% endif %}
            class="btn btn-primary slider-reveal">{{section.settings.btn_label}}</a>
-         </div>
+         </div> {% endcomment %}
 
       </li>
       <li class="slider-item " data-hero-slider-item>
@@ -55,7 +55,7 @@
          <div class="slider-bg hero-card has-bg-image" style="background-image: url('{{ 'Ram2.png' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
          </div>   
         {% endif %} 
-        <div class="card-content">
+        {% comment %} <div class="card-content">
           <h1 class="h1 hero-title slider-reveal">
             {{ section.settings.title2 }}<br/>
             {{ section.settings.subtitle2 }}
@@ -70,7 +70,7 @@
             role="link" aria-disabled="true"
           {% endif %}
          class="btn btn-primary slider-reveal">{{section.settings.btn_label}}</a>
-        </div>
+        </div> {% endcomment %}
       </li>
       <li class="slider-item" data-hero-slider-item>
         {% if section.settings.image3 != blank %}
@@ -80,7 +80,7 @@
          <div class="slider-bg hero-card has-bg-image" style="background-image: url('{{ 'Ram3.png' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
          </div>   
         {% endif %} 
-      <div class="card-content">
+      {% comment %} <div class="card-content">
         <h1 class="h1 hero-title slider-reveal">
           {{ section.settings.title3 }}<br/>
           {{ section.settings.subtitle3 }}
@@ -98,7 +98,7 @@
          class="btn btn-primary slider-reveal">{{section.settings.btn_label}}</a>
         </div>
 
-      </div>
+      </div> {% endcomment %}
       </li>
     </ul>
 
