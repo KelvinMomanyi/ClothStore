@@ -749,7 +749,7 @@
   
   .collection-card{
     background-color: var(--light-gray);
-    min-height: 400px;
+    min-height: 200px;
     padding:40px;
     padding-block-end: 30px;
     display: flex;
