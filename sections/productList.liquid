@@ -1,12 +1,14 @@
 <section class="section shop" id="shop" aria-label="shop">
   <div class="container">
     <div style="display:flex; flex-direction:column; gap:28px;">
-      {% assign collection_handles = "kids, trending, adidas" | split: ", " %} <!-- Define collections to display -->
 
-      {% for handle in collection_handles %}
+      <!-- Default collection handles commonly used in Dawn theme -->
+      {% assign default_collections = "featured, new, trending" | split: ", " %}
+
+      {% for handle in default_collections %}
         {% assign current_collection = collections[handle] %}
 
-        {% if current_collection != blank %}
+        {% if current_collection != blank and current_collection.products_count > 0 %}
           <div>
             <div class="title-wrapper">
               <h2 class="h2 section-title">{{ current_collection.title }} Collection</h2>
@@ -62,12 +64,13 @@
             </ul>
           </div>
         {% else %}
-          <p>No matches found for {{ handle }}</p>
+          <p>No products available in the {{ handle }} collection</p>
         {% endif %}
       {% endfor %}
     </div>
   </div>
 </section>
+
 
 
 <style>
