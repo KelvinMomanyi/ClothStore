@@ -70,6 +70,30 @@
               </div>
             </a>
           </li>
+          <li>
+            <a href="/collection">
+              <div class="collection-card has-before hover:shine">
+                  <h2 class="h2 card-title">{{section.settings.title3 }}</h2>
+                  <p class="card-text">{{section.settings.subtitle3 }}</p>
+                  <a {% if section.settings.link %}
+                    href="{{ section.settings.link }}"
+                  {% else %}
+                    role="link" aria-disabled="true"
+                  {% endif %}
+                  class="btn-link">
+                  {{section.settings.btn_label3}}
+                  <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                </a>
+                  {% if section.settings.image3 != blank %}  
+                    <div class="has-bg-image" style="background-image: url('{{ section.settings.image3 | image_url }}');">
+                    </div> 
+                   {% else %}
+                   <div class="has-bg-image" style="background-image: url('{{ 'sho1.jpg' | asset_url }}');">
+                   </div>   
+                  {% endif %}
+              </div>
+            </a>
+          </li>
       </ul>
     </div> 
 </section>
