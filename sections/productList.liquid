@@ -1,91 +1,26 @@
 <section class="section shop" id="shop" aria-label="shop">
   <div class="container">
-    <div style='display:flex; flex-direction:column; gap:28px;'>
-      <div>
-          <div class="title-wrapper">
-              <h2 class="h2 section-title">{{ collections['kids'].title }} collection</h2>
-              <a href="{{ collections['adidas'].url }}" class="btn-link">
-                  <span class="span">Shop All Products</span>
-                  <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
+    <div style="display:flex; flex-direction:column; gap:28px;">
+      {% assign collection_handles = "kids, trending, adidas" | split: ", " %} <!-- Define collections to display -->
+
+      {% for handle in collection_handles %}
+        {% assign current_collection = collections[handle] %}
+
+        {% if current_collection != blank %}
+          <div>
+            <div class="title-wrapper">
+              <h2 class="h2 section-title">{{ current_collection.title }} Collection</h2>
+              <a href="{{ current_collection.url }}" class="btn-link">
+                <span class="span">Shop All Products</span>
+                <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
               </a>
-          </div>
+            </div>
 
-          <ul class="has-scrollbar">
-              {% assign nike_collection = collections['kids'] %}
-              {% if nike_collection != blank %}
-                  {% for product in nike_collection.products %}
-                      <li class="scrollbar-item">
-                          <div class="shop-card">
-                              <div class="card-banner img-holder" >
-                                  <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" width="540" height="720" loading="lazy">
-                                  <span class="badge" aria-label="20% off">-20%</span>
-                                  <div class="card-actions">
-                                    <form   action="/cart/add" method="post" enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
-                                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                                      <button type="submit" class="action-btn" aria-label="add to cart">
-                                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                                      </button>
-                                    </form>
-                                    
-                                  
-
-
-
-          
-                                      <button class="action-btn" aria-label="add to wishlist">
-                                          <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                                      </button>
-          
-                                      <button class="action-btn" aria-label="compare">
-                                          <ion-icon name="repeat-outline" aria-hidden="true"></ion-icon>
-                                      </button>
-                                  </div>
-                              </div>
-                              <div class="card-content">
-                                  <h3>
-                                      <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-                                  </h3>
-                                  <div class="price">
-                                      <del class="del">{{ product.compare_at_price | money }}</del>
-                                      <span class="span">{{ product.price | money }}</span>
-                                      {% unless product.available %}<br><strong>Sold Out</strong>{% endunless %}
-                                  </div>
-                                
-                                  <div class="card-rating">
-                                      <div class="rating-wrapper" aria-label="5 star rating">
-                                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                                      </div>
-                                      <p class="rating-text">5170 reviews</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </li>
-                  {% endfor %}
-              {% else %}
-                  <p>No matches found</p>
-              {% endif %}
-          </ul>
-      </div> 
-      <div> 
-          <div class="title-wrapper">
-            <h2 class="h2 section-title">Top {{ collections['trending'].title }}</h2>
-            <a href="{{ collections['adidas'].url }}" class="btn-link">
-              <span class="span">Shop All Products</span>
-              <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
-            </a>
-          </div>
-        
-          <ul class="has-scrollbar">
-            {% assign nike_collection = collections['trending'] %}
-            {% if nike_collection != blank %}
-              {% for product in nike_collection.products %}
+            <ul class="has-scrollbar">
+              {% for product in current_collection.products %}
                 <li class="scrollbar-item">
                   <div class="shop-card">
-                    <div class="card-banner img-holder" >
+                    <div class="card-banner img-holder">
                       <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" width="540" height="720" loading="lazy">
                       <span class="badge" aria-label="20% off">-20%</span>
                       <div class="card-actions">
@@ -104,9 +39,7 @@
                       </div>
                     </div>
                     <div class="card-content">
-                      <h3>
-                        <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-                      </h3>
+                      <h3><a href="{{ product.url }}" class="card-title">{{ product.title }}</a></h3>
                       <div class="price">
                         <del class="del">{{ product.compare_at_price | money }}</del>
                         <span class="span">{{ product.price | money }}</span>
@@ -126,15 +59,16 @@
                   </div>
                 </li>
               {% endfor %}
-            {% else %}
-              <p>No matches found</p>
-            {% endif %}
-          </ul>
-       </div> 
-      </div>
+            </ul>
+          </div>
+        {% else %}
+          <p>No matches found for {{ handle }}</p>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
+
 
 <style>
 /*-----------------------------------*\
